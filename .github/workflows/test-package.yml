@@ -14,7 +14,6 @@ jobs:
   tests:
     name: "Python ${{ matrix.python-version }}"
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != 'collerek/ormar'
     strategy:
       matrix:
         python-version: [3.7, 3.8, 3.9, "3.10"]
@@ -70,6 +69,5 @@ jobs:
       uses: codecov/codecov-action@v3
     - name: Test & publish code coverage
       uses: paambaati/codeclimate-action@v3.0.0
-      if: github.event.pull_request.head.repo.full_name == 'collerek/ormar'
       env:
         CC_TEST_REPORTER_ID:  ${{ secrets.CC_COVERAGE_TOKEN }}
