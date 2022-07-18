@@ -1,5 +1,7 @@
 from typing import Any, Dict, List, Optional, Set, TYPE_CHECKING, TypeVar, Union
 
+from sqlalchemy import literal
+
 import ormar.queryset  # noqa I100
 from ormar.exceptions import ModelPersistenceError, NoMatch
 from ormar.models import NewBaseModel  # noqa I100
@@ -277,7 +279,7 @@ class Model(ModelRow):
         :return: reloaded Model
         :rtype: Model
         """
-        expr = self.Meta.table.select().where(self.pk_column == pk if pk else self.pk)
+        expr = self.Meta.table.select().where(self.pk_column == literal(pk) if pk else self.pk)
         row = await self.Meta.database.fetch_one(expr)
         if not row:  # pragma nocover
             raise NoMatch("Instance was deleted from database and cannot be refreshed")
