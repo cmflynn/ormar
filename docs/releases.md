@@ -1,3 +1,37 @@
+# 0.12.0
+
+## ✨ Breaking Changes
+
+* `Queryset.bulk_create` will now raise `ModelListEmptyError` on empty list of models (by @ponytailer - thanks!) [#853](https://github.com/collerek/ormar/pull/853)
+
+## ✨ Features
+* `Model.upsert()` now handles a flag `__force_save__`: `bool` that allow upserting the models regardless of the fact if they have primary key set or not. 
+Note that setting this flag will cause two queries for each upserted model -> `get` to check if model exists and later `update/insert` accordingly. [#889](https://github.com/collerek/ormar/pull/853)
+
+## 🐛 Fixes
+
+* Fix for empty relations breaking `construct` method (by @Abdeldjalil-H - thanks!) [#870](https://github.com/collerek/ormar/issues/870)
+* Fix save related not saving models with already set pks (including uuid) [#885](https://github.com/collerek/ormar/issues/885)
+* Fix for wrong relations exclusions depending on the order of exclusions [#779](https://github.com/collerek/ormar/issues/779)
+* Fix `property_fields` not being inherited properly [#774](https://github.com/collerek/ormar/issues/774)
+
+# 0.11.3
+
+## ✨ Features
+
+* Document `onupdate` and `ondelete` referential actions in `ForeignKey` and provide `ReferentialAction` enum to specify the behavior of the relationship (by @SepehrBazyar - thanks!) [#724](https://github.com/collerek/ormar/issues/724)
+* Add `CheckColumn` to supported constraints in models Meta (by @SepehrBazyar - thanks!) [#729](https://github.com/collerek/ormar/issues/729)
+
+## 🐛 Fixes
+
+* Fix limiting query result to 0 should return empty list (by @SepehrBazyar - thanks!) [#766](https://github.com/collerek/ormar/issues/713)
+
+## 💬 Other
+
+* Add dark mode to docs (by @SepehrBazyar - thanks!) [#717](https://github.com/collerek/ormar/pull/717) 
+* Update aiomysql dependency [#778](https://github.com/collerek/ormar/issues/778)
+
+
 # 0.11.2
 
 ## 🐛 Fixes
